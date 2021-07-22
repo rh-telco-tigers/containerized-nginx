@@ -5,3 +5,4 @@ This repository is about containerizing nginx and adding a second interface to t
 # Adding second interface to worker nodes
 
 1. Create a trunk port in esxi
+   ![Trunk Port](https://github.com/rh-telco-tigers/containerized-nginx/raw/main/images/trunk-port.png)
