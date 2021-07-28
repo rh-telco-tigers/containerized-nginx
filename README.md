@@ -14,7 +14,7 @@ This repository is about containerizing nginx and adding a second interface to t
 
    ![Trunk Port](https://github.com/rh-telco-tigers/containerized-nginx/raw/main/images/trunk-port.png)
 
-2. Add second interface to worker node using the port created abve
+2. Add second interface to worker node using the port created above
 
    ![Trunk Port](https://github.com/rh-telco-tigers/containerized-nginx/raw/main/images/second-nic.png)
 
@@ -101,13 +101,19 @@ spec:
   - name: app2
     image: quay.io/ashisha/rogers-app2
 ```
+Note the ip of the pods created above
+```
+oc get pod app1 -o json | jq .status.podIP
+"10.129.2.205"
+oc get pod app2 -o json | jq .status.podIP
+"10.129.1.147"
+```
+
 8. Create a default nginx configuration name the file as default.conf
 ```
 upstream loadbalancer {
 server 10.131.1.147:5000 weight=5;
 server 10.129.2.205:5000 weight=5;
-server 10.129.2.206:5000 weight=5;
-server 10.129.2.207:5000 weight=5;
 }
 server {
 location / {
